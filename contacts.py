@@ -88,18 +88,18 @@ def list_(lcontacts):
         print(f'Phone number  : {info.get('phone', 'N/A')}')
         print(f'Comment   : {info.get('comment')}')
         print(f'Tags : {info.get('tags', 'N/A')}')
-        print('--------------------------------------')
+
 
 
 def show_one_(scontacts,detect_id):
 
-    print(f'\nID: {detect_id}, {scontacts.get('created', 'N/A')}')
+    print(f'\nID: {detect_id}, {scontacts[detect_id].get('created', 'N/A')}')
     print(f'Name/Nickname : {scontacts[detect_id].get('name', 'N/A')}')
     print(f'Surname       : {scontacts[detect_id].get('surname', 'N/A')}')
     print(f'Phone number  : {scontacts[detect_id].get('phone', 'N/A')}')
     print(f'Comment   : {scontacts[detect_id].get('comment')}')
     print(f'Tags : {scontacts[detect_id].get('tags', 'N/A')}')
-    print('--------------------------------------')
+    print('---')
 
 
 def options_menu(omsg):
@@ -116,7 +116,7 @@ def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False ):
     while True:
 
         if not one_id: detect_id = (input(mmsg['OPT']['DETECT_ID'])).upper()    # Задаем ID контакта, который будем редактировать
-        else:          detect_id = one_id                                       # В случае если было найдено больше одной записи
+        else:          detect_id = one_id                                       # Случай если найдена только одна запись
 
         if detect_id == 'X':
             break
@@ -129,7 +129,7 @@ def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False ):
             if del_or_mod == 'x':
                 break
 
-            elif del_or_mod == 'm':  # Редактируем
+            elif del_or_mod == 'm':         # Редактируем
 
                 while True:
                     ask_key = (input(mmsg['ASK']['KEY'])).lower()  # Спрашиваем, что именно будем редактировать

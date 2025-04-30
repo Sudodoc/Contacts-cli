@@ -12,11 +12,7 @@ msg_eng = {
         'SELECT'         : "\nSelect option: ",
         'X'              : "[x] Exit",
         'BYE'            : "Contacts-cli is now closed",
-        'SEARCH_MENU'    :
-
-"""
-Insert string for global search.
-[x] Cancel""",
+        'SEARCH_MENU'    : "Insert string for global search or [x] to cancel",
 
         'SEARCH_HELP'   :
 
@@ -37,7 +33,7 @@ Insert string for global search.
     },
 
     'ASK' : {
-        'TELE'          : "Enter phone number or [x] to cancel: ",
+        'TELE'          : "\nEnter phone number or [x] to cancel: ",
         'NAME'          : "Enter name: ",
         'SURN'          : "Enter surname: ",
         'NOTE'          : "Enter any additional notes: ",

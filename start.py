@@ -31,8 +31,7 @@ if settings["fist_run_ini"]:
     s_json(conf_path, settings)
     s_json(cont_path, contacts)
 
-elif settings["language"] == 'ru':          # Устанавливаем язык интерфейса на русский, если он задан в settings
-    msg = msg_ru
+elif settings["language"] == 'ru': msg = msg_ru         # Устанавливаем язык интерфейса на русский, если он задан в settings
 
 else:
     if settings["language"] != 'en':
@@ -49,6 +48,7 @@ contacts = l_json(cont_path)                # Загружаем контакт�
 
 
 print(msg['INI']['HELLO_'])
+
 while True:
 
     options_menu(msg)                       # собсна главное меню
