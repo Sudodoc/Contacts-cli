@@ -111,15 +111,17 @@ def options_menu(omsg):
     print(omsg['OPT']['X'])
 
 
-def modify_or_delete(mmsg, mcontacts, mcont_path):
+def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False ):
 
     while True:
-        detect_id = (input(mmsg['OPT']['DETECT_ID'])).upper()  # Задаем ID контакта, который будем редактировать
+
+        if not one_id: detect_id = (input(mmsg['OPT']['DETECT_ID'])).upper()    # Задаем ID контакта, который будем редактировать
+        else:          detect_id = one_id                                       # В случае если было найдено больше одной записи
 
         if detect_id == 'X':
             break
 
-        elif detect_id in mcontacts:  # Проверяем, есть ли введенный ID в списке контактов
+        elif detect_id in mcontacts:                                # Проверяем, есть ли введенный ID в списке контактов
             show_one_(mcontacts, detect_id)
 
             del_or_mod = input(mmsg['ASK']['DEL_OR_MOD']).lower()  # Уточняем, будем редактировать или удалять.
@@ -135,7 +137,7 @@ def modify_or_delete(mmsg, mcontacts, mcont_path):
                     if ask_key == 'x':
                         break
 
-                    elif ask_key == 'tags':  # Отдельно прописываем обработку тегов
+                    elif ask_key == 'tags':                        # Отдельно прописываем обработку тегов
                         new_tags = list(set((input(mmsg['ASK']['TAGS'])).lower().split(' ')))
 
                         if new_tags == 'x': break
@@ -191,10 +193,9 @@ def search_(string, secontacts):
             if string in (str(item)).lower():
                 found_contacts[c_id] = secontacts[c_id]
 
-    if not found_contacts:
-        return False
-    else:
-        return found_contacts
+    if not found_contacts: return False
+
+    else: return found_contacts
 
 if __name__ == "__main__":
     print(create_contact(msg_eng))

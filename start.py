@@ -16,11 +16,9 @@ if not conf_path.exists():                  # Проверка первого з
                                             # Случай, если файл settings.json отсутствует.
 
     settings, msg, contacts, count = fist_run_ini()
-
     # check---------
     # print(settings, contacts, sep='\n')
     # --------------
-
     s_json(conf_path, settings)
     s_json(cont_path, contacts)
 
@@ -43,7 +41,7 @@ else:
 
 
 count = settings['counter']                 # Загружаем счетчик
-contacts = l_json(cont_path)                # Загружаем контакты и count после всех инициализаций наконец-то"""
+contacts = l_json(cont_path)                # Загружаем контакты и count после всех инициализаций наконец-то
 
 # check--------------------------------------------------------
 # print(settings, contacts, msg['INI']['LANG_CHECK'], sep='\n')
@@ -104,8 +102,11 @@ while True:
 
                 found_contacts = search_(s_string, contacts)
 
-                if not found_contacts:
-                    print(msg['SYS']['NOT_FOUND'])
+                if not found_contacts: print(msg['SYS']['NOT_FOUND'])
+
+                elif len(found_contacts) == 1:
+                    one_id = list(found_contacts.keys())[0]
+                    modify_or_delete(msg, contacts, cont_path, one_id)
 
                 else:
                     list_(found_contacts)
