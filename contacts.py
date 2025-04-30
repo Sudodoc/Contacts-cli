@@ -111,7 +111,7 @@ def options_menu(omsg):
     print(omsg['OPT']['X'])
 
 
-def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False ):
+def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False):
 
     while True:
 

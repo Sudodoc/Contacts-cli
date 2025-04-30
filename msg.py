@@ -11,8 +11,8 @@ msg_eng = {
         'DELETE'         : "[2] Delete contact",
         'SELECT'         : "\nSelect option: ",
         'X'              : "[x] Exit",
-        'BYE'            : "Contacts-cli is now closed",
-        'SEARCH_MENU'    : "Insert string for global search or [x] to cancel",
+        'BYE'            : "\nContacts-cli is now closed",
+        'SEARCH_MENU'    : "\nInsert string for global search or [x] to cancel",
 
         'SEARCH_HELP'   :
 
@@ -27,22 +27,22 @@ msg_eng = {
         'LANG_CHECK'    : "English",
         'FIRST_RUN'     : "Welcome to Contacts-CLI! This is the first run.",
         'HELLO_'        : "\nWelcome to Contacts-CLI!",
-        'SYS_LANG'      : "Select user language (RU/EN): ",
-        'EN_OK'         : "English language is selected",
-        'FST_CONT'      : "Let's create you first contact!",
+        'SYS_LANG'      : "\nSelect user language (RU/EN): ",
+        'EN_OK'         : "\nEnglish language is selected",
+        'FST_CONT'      : "\nLet's create you first contact!",
     },
 
     'ASK' : {
         'TELE'          : "\nEnter phone number or [x] to cancel: ",
-        'NAME'          : "Enter name: ",
-        'SURN'          : "Enter surname: ",
-        'NOTE'          : "Enter any additional notes: ",
-        'TAGS'          : "Enter tags, separated by spaces: ",
+        'NAME'          : "\nEnter name: ",
+        'SURN'          : "\nEnter surname: ",
+        'NOTE'          : "\nEnter any additional notes: ",
+        'TAGS'          : "\nEnter tags, separated by spaces: ",
         'ADDC'          : "Would you like to add one more field? [Y]/[n]: ",
         'DEL_OR_MOD'    : "Press [m] to modify, or [d] to delete, or [x] to cancel: ",
-        'KEY'           : "Enter field to modify or [x] to cancel: ",
-        'ITEM'          : "Enter new value or [x] to cancel: ",
-        'CONFIRM_DEL'   : "Are you sure you want to delete this contact? [Y]/[n]: ",
+        'KEY'           : "\nEnter field to modify or [x] to cancel: ",
+        'ITEM'          : "\nEnter new value or [x] to cancel: ",
+        'CONFIRM_DEL'   : "\nAre you sure you want to delete this contact? [Y]/[n]: ",
     },
 
     'SYS' : {

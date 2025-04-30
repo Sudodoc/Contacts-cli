@@ -75,6 +75,6 @@ def gen_id(name, surname, tel, rcount):
 
 if __name__ == "__main__":
 
-    # print(random_str())
-    # print(translit("Семён Семёнович"))
+    print(random_str())
+    print(translit("Семён Семёнович"))
     print(gen_id("Иван", "Иванович", '+79244448990', 1))
