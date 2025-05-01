@@ -6,8 +6,8 @@ from systems import s_json
 
 def get_formated_datetime():
     timenow = datetime.now()
-    f_timenow = timenow.strftime("%d.%m.%y|%H:%M:%S")
-    return f_timenow
+    return timenow.strftime("%d.%m.%y|%H:%M:%S")
+
 
 
 def create_contact(cmsg, xcount=1, return_id=False, cancel=False):
@@ -118,24 +118,22 @@ def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False):
         if not one_id: detect_id = (input(mmsg['OPT']['DETECT_ID'])).upper()    # Задаем ID контакта, который будем редактировать
         else:          detect_id = one_id                                       # Случай если найдена только одна запись
 
-        if detect_id == 'X':
-            break
+        if detect_id == 'X': break
 
         elif detect_id in mcontacts:                                # Проверяем, есть ли введенный ID в списке контактов
+
             show_one_(mcontacts, detect_id)
+            del_or_mod = input(mmsg['ASK']['DEL_OR_MOD']).lower()   # Уточняем, будем редактировать или удалять.
 
-            del_or_mod = input(mmsg['ASK']['DEL_OR_MOD']).lower()  # Уточняем, будем редактировать или удалять.
-
-            if del_or_mod == 'x':
-                break
+            if del_or_mod == 'x': break
 
             elif del_or_mod == 'm':         # Редактируем
 
                 while True:
+
                     ask_key = (input(mmsg['ASK']['KEY'])).lower()  # Спрашиваем, что именно будем редактировать
 
-                    if ask_key == 'x':
-                        break
+                    if ask_key == 'x': break
 
                     elif ask_key == 'tags':                        # Отдельно прописываем обработку тегов
                         new_tags = list(set((input(mmsg['ASK']['TAGS'])).lower().split(' ')))
@@ -147,11 +145,11 @@ def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False):
                         s_json(mcont_path, mcontacts)
 
                     elif ask_key in mcontacts[detect_id] and ask_key != 'tags':
-                        ask_new_item = input(mmsg['ASK']['ITEM'])
+                        new_item = input(mmsg['ASK']['ITEM'])
 
-                        if ask_new_item == 'x': break
+                        if new_item == 'x': break
 
-                        mcontacts[detect_id][ask_key] = ask_new_item
+                        mcontacts[detect_id][ask_key] = new_item
                         mcontacts[detect_id]['modified'] = get_formated_datetime()
                         s_json(mcont_path, mcontacts)
 
@@ -163,6 +161,7 @@ def modify_or_delete(mmsg, mcontacts, mcont_path, one_id=False):
             elif del_or_mod == 'd':  # Удалить контакт
 
                 while True:
+
                     del_confirm = input(mmsg['ASK']['CONFIRM_DEL']).lower()
 
                     if del_confirm == 'y':

@@ -81,7 +81,6 @@ while True:
             #    print(f'{key} : {item}')
             # --------------------------------
             s_json(cont_path, contacts)
-
             settings['counter'] = count
             s_json(conf_path, settings)
 
