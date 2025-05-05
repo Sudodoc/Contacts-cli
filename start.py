@@ -8,17 +8,10 @@ msg = msg_eng
 conf_path = Path().parent / 'settings.json'
 cont_path = Path().parent / 'contacts.json'
 
-# check-------------------
-# print(conf_path, conf_path.exists(), cont_path, conf_path.exists(), sep='|')
-# -----------------------
-
 if not conf_path.exists():                  # Проверка первого запуска программы.
                                             # Случай, если файл settings.json отсутствует.
 
     settings, msg, contacts, count = fist_run_ini()
-    # check---------
-    # print(settings, contacts, sep='\n')
-    # --------------
     s_json(conf_path, settings)
     s_json(cont_path, contacts)
 
@@ -41,11 +34,6 @@ else:
 
 count = settings['counter']                 # Загружаем счетчик
 contacts = l_json(cont_path)                # Загружаем контакты и count после всех инициализаций наконец-то
-
-# check--------------------------------------------------------
-# print(settings, contacts, msg['INI']['LANG_CHECK'], sep='\n')
-# -------------------------------------------------------------
-
 
 print(msg['INI']['HELLO_'])
 
@@ -76,10 +64,6 @@ while True:
                 contacts = {}
 
             contacts.update(new_contact)
-            # check---------------------------
-            #for key, item in contacts.items():
-            #    print(f'{key} : {item}')
-            # --------------------------------
             s_json(cont_path, contacts)
             settings['counter'] = count
             s_json(conf_path, settings)

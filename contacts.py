@@ -82,23 +82,23 @@ def list_(lcontacts):
 
     for i, (c_id, info) in enumerate(lcontacts.items(), start=1):
 
-        print(f'\n#{i}.ID: {c_id}, {info.get('created', 'N/A')}')
-        print(f'Name/Nickname : {info.get('name', 'N/A')}')
-        print(f'Surname       : {info.get('surname', 'N/A')}')
-        print(f'Phone number  : {info.get('phone', 'N/A')}')
-        print(f'Comment   : {info.get('comment')}')
-        print(f'Tags : {info.get('tags', 'N/A')}')
+        print(f'\n#{i}.ID: {c_id}, {info.get("created", "N/A")}')
+        print(f'Name/Nickname : {info.get("name", "N/A")}')
+        print(f'Surname       : {info.get("surname", "N/A")}')
+        print(f'Phone number  : {info.get("phone", "N/A")}')
+        print(f'Comment   : {info.get("comment")}')
+        print(f'Tags : {info.get("tags", "N/A")}')
 
 
 
 def show_one_(scontacts,detect_id):
 
-    print(f'\nID: {detect_id}, {scontacts[detect_id].get('created', 'N/A')}')
-    print(f'Name/Nickname : {scontacts[detect_id].get('name', 'N/A')}')
-    print(f'Surname       : {scontacts[detect_id].get('surname', 'N/A')}')
-    print(f'Phone number  : {scontacts[detect_id].get('phone', 'N/A')}')
-    print(f'Comment   : {scontacts[detect_id].get('comment')}')
-    print(f'Tags : {scontacts[detect_id].get('tags', 'N/A')}')
+    print(f'\nID: {detect_id}, {scontacts[detect_id].get("created", "N/A")}')
+    print(f'Name/Nickname : {scontacts[detect_id].get("name", "N/A")}')
+    print(f'Surname       : {scontacts[detect_id].get("surname", "N/A")}')
+    print(f'Phone number  : {scontacts[detect_id].get("phone", "N/A")}')
+    print(f'Comment   : {scontacts[detect_id].get("comment")}')
+    print(f'Tags : {scontacts[detect_id].get("tags", "N/A")}')
     print('---')
 
 
