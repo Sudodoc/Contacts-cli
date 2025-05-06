@@ -2,6 +2,32 @@ from random_id import gen_id
 from msg import msg_eng
 from datetime import datetime
 from systems import s_json
+from prettytable import PrettyTable
+
+class ContactList:
+
+    """Класс определяющий список всех контактов со 100% общим для всех атрибутом
+    cid - contact id , или уникальный ID контакта, который всегда присутствует"""
+
+    def __init__(self, cid):
+        self.id = cid
+
+
+class SimpleProfile(ContactList):
+
+    """Класс определяющий отдельно взятый контакт / профиль - profile
+    из списка контактов Contactlist"""
+
+    def __init__(self, coname, cosurn, cotel, conote, cotags, cotime, comod, cid):
+        super().__init__(cid)
+        self.name = coname
+        self.surname = cosurn
+        self.phone  = cotel
+        self.comment = conote
+        self.tags = cotags
+        self.created = cotime
+        self.modified = comod
+
 
 
 def get_formated_datetime():
@@ -79,16 +105,35 @@ def create_contact(cmsg, xcount=1, return_id=False, cancel=False):
 
 
 def list_(lcontacts):
+    ctable = PrettyTable()
 
-    for i, (c_id, info) in enumerate(lcontacts.items(), start=1):
+    ctable.field_names = ['#',
+                          'ID',
+                          'Name/Nickname',
+                          'Surname',
+                          'Phone',
+                          'Comment',
+                          'Tags',
+                          'Created',
+                          'Modified',
+                          ]
 
-        print(f'\n#{i}.ID: {c_id}, {info.get("created", "N/A")}')
-        print(f'Name/Nickname : {info.get("name", "N/A")}')
-        print(f'Surname       : {info.get("surname", "N/A")}')
-        print(f'Phone number  : {info.get("phone", "N/A")}')
-        print(f'Comment   : {info.get("comment")}')
-        print(f'Tags : {info.get("tags", "N/A")}')
+    for i, (cid, info) in enumerate(lcontacts.items(), start=1):
+        ctable.add_rows(
+            [
+                [i, cid,
+                 info.get('name', 'N/A'),
+                 info.get('surname', 'N/A'),
+                 info.get('phone', 'N/A'),
+                 info.get('comment', 'N/A'),
+                 info.get('tags', 'N/A'),
+                 info.get('created', 'N/A'),
+                 info.get('modified', 'N/A')
+                 ]
+            ]
+        )
 
+    print(ctable)
 
 
 def show_one_(scontacts,detect_id):
