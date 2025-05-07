@@ -1,5 +1,5 @@
 from systems import set_lang
-from contacts import create_contact
+from contclass import ContactList
 from msg import msg_eng
 
 
@@ -38,8 +38,10 @@ def fist_run_ini():
 
     print(imsg['INI']['FST_CONT'])
 
-    fst_contact = create_contact(imsg, 1)
+    contact = ContactList({}, isettings, imsg)
+    fst_contact = contact.new()
+
     isettings['counter'] = 1
 
-    return isettings, imsg, fst_contact, 1
+    return isettings, imsg, fst_contact
 

@@ -1,8 +1,9 @@
 from pathlib import Path
 from initialize import fist_run_ini
 from systems import l_json, s_json
-from contacts import create_contact, list_, options_menu, modify_or_delete, search_
+from contacts import list_, options_menu, search_
 from msg import *
+from contclass import ContactList
 
 msg = msg_eng
 conf_path = Path().parent / 'settings.json'
@@ -11,7 +12,7 @@ cont_path = Path().parent / 'contacts.json'
 if not conf_path.exists():                  # Проверка первого запуска программы.
                                             # Случай, если файл settings.json отсутствует.
 
-    settings, msg, contacts, count = fist_run_ini()
+    settings, msg, contacts = fist_run_ini()
     s_json(conf_path, settings)
     s_json(cont_path, contacts)
 
@@ -20,7 +21,7 @@ settings = l_json(conf_path)                # Вариант, когда фай�
 
 if settings["fist_run_ini"]:
 
-    settings, msg, contacts, count = fist_run_ini()
+    settings, msg, contacts = fist_run_ini()
     s_json(conf_path, settings)
     s_json(cont_path, contacts)
 
@@ -33,7 +34,9 @@ else:
 
 
 count = settings['counter']                 # Загружаем счетчик
-contacts = l_json(cont_path)                # Загружаем контакты и count после всех инициализаций наконец-то
+# contacts = l_json(cont_path)                # Загружаем контакты и count после всех инициализаций наконец-то
+
+contacts = ContactList(l_json(cont_path), settings, msg)
 
 print(msg['INI']['HELLO_'])
 
@@ -45,14 +48,15 @@ while True:
 
     if option == '1':
 
-        list_(contacts)
-        modify_or_delete(msg, contacts, cont_path)
+
+        contacts.all()
+        contacts.mod(cont_path)
 
 
     elif option == '2':
 
         count += 1
-        new_contact, go_back = create_contact(msg, count)
+        new_contact, go_back = contacts.new(count)
 
         if go_back:
             count -= 1
@@ -60,11 +64,11 @@ while True:
 
         else:
 
-            if contacts is None:
-                contacts = {}
+            if contacts.vault is None:
+                contacts.vault = {}
 
-            contacts.update(new_contact)
-            s_json(cont_path, contacts)
+            contacts.vault.update(new_contact)
+            s_json(cont_path, contacts.vault)
             settings['counter'] = count
             s_json(conf_path, settings)
 
@@ -83,17 +87,17 @@ while True:
 
             else:
 
-                found_contacts = search_(s_string, contacts)
+                found_contacts = search_(contacts.vault, s_string)
 
                 if not found_contacts: print(msg['SYS']['NOT_FOUND'])
 
                 elif len(found_contacts) == 1:
                     one_id = list(found_contacts.keys())[0]
-                    modify_or_delete(msg, contacts, cont_path, one_id)
+                    contacts.mod(cont_path, one_id)
 
                 else:
                     list_(found_contacts)
-                    modify_or_delete(msg, contacts, cont_path)
+                    contacts.mod(cont_path)
 
 
     elif option == 'x':
