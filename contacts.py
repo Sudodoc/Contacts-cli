@@ -1,39 +1,7 @@
 from random_id import gen_id
 from msg import msg_eng
-from datetime import datetime
-from systems import s_json
+from systems import s_json, get_formated_datetime
 from prettytable import PrettyTable
-
-class ContactList:
-
-    """Класс определяющий список всех контактов со 100% общим для всех атрибутом
-    cid - contact id , или уникальный ID контакта, который всегда присутствует"""
-
-    def __init__(self, cid):
-        self.id = cid
-
-
-class SimpleProfile(ContactList):
-
-    """Класс определяющий отдельно взятый контакт / профиль - profile
-    из списка контактов Contactlist"""
-
-    def __init__(self, coname, cosurn, cotel, conote, cotags, cotime, comod, cid):
-        super().__init__(cid)
-        self.name = coname
-        self.surname = cosurn
-        self.phone  = cotel
-        self.comment = conote
-        self.tags = cotags
-        self.created = cotime
-        self.modified = comod
-
-
-
-def get_formated_datetime():
-    timenow = datetime.now()
-    return timenow.strftime("%d.%m.%y|%H:%M:%S")
-
 
 
 def create_contact(cmsg, xcount=1, return_id=False, cancel=False):
@@ -105,8 +73,8 @@ def create_contact(cmsg, xcount=1, return_id=False, cancel=False):
 
 
 def list_(lcontacts):
-    ctable = PrettyTable()
 
+    ctable = PrettyTable()
     ctable.field_names = ['#',
                           'ID',
                           'Name/Nickname',
@@ -119,6 +87,7 @@ def list_(lcontacts):
                           ]
 
     for i, (cid, info) in enumerate(lcontacts.items(), start=1):
+
         ctable.add_rows(
             [
                 [i, cid,
@@ -133,7 +102,7 @@ def list_(lcontacts):
             ]
         )
 
-    print(ctable)
+    print('', ctable, sep='\n')
 
 
 def show_one_(scontacts,detect_id):

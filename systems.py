@@ -1,10 +1,6 @@
 import json
-#from opcode import name_op
-
 from msg import *
-from pathlib import Path
-from prettytable import PrettyTable
-
+from datetime import datetime
 
 
 def s_json(f_path, content):
@@ -30,40 +26,28 @@ def set_lang(lg='en'):
         print(msg_eng['SYS']['LANG_ERR'])
         return None
 
+
+def get_formated_datetime():
+    timenow = datetime.now()
+    return timenow.strftime("%d.%m.%y|%H:%M:%S")
+
+
 if __name__ == "__main__":
+
+
+    from pathlib import Path
+    from contclass import ContactList
 
     conf_path = Path().parent / 'settings.json'
     cont_path = Path().parent / 'contacts.json'
 
-    contacts = l_json(cont_path)
+    # from contacts import list_, SimpleProfile
+    # contacts = l_json(cont_path)
+    # list_(contacts)
 
-    ctable = PrettyTable()
+    contacts = ContactList(l_json(cont_path), l_json(conf_path), msg_eng)
+    print(contacts)
+    contacts.all()
 
-    ctable.field_names = ['#',
-                          'ID',
-                          'Name/Nickname',
-                          'Surname',
-                          'Phone',
-                          'Comment',
-                          'Tags',
-                          'Created',
-                          'Modified',
-                          ]
 
-    for i, (cid, info) in enumerate(contacts.items(), start=1):
 
-        ctable.add_rows(
-            [
-                [i, cid,
-                 info.get('name', 'N/A'),
-                 info.get('surname', 'N/A'),
-                 info.get('phone', 'N/A'),
-                 info.get('comment', 'N/A'),
-                 info.get('tags', 'N/A'),
-                 info.get('created', 'N/A'),
-                 info.get('modified', 'N/A')
-                 ]
-            ]
-        )
-
-    print(ctable)
